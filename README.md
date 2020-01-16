@@ -1,13 +1,13 @@
 # Face Detection and Alignment MTCNN
 
-## [__Download the toolbox here__](TODO)
+## [__Download the toolbox here__](https://github.com/matlab-deep-learning/mtcnn-face-detection/releases/latest/download/MTCNN%20Face%20Detection.mltbx)
 
 This repository implements a deep-learning based face detection and facial landmark localization model using [multi-task cascaded convolutional neural networks (MTCNNs)](https://kpzhang93.github.io/MTCNN_face_detection_alignment/). 
 
 - [📦 Installation](#installation)
-- [🏁 Getting Started](#getting-started)
+- [�?? Getting Started](#getting-started)
 - [🔎😄 Usage](#usage)
-- [❓ About](#about)
+- [�?� About](#about)
 - [💬 Contribute](#contribute)
 
 _Note: This code supports inference using a pretrained model. Training from scratch is not supported. Weights are imported from the [original MTCNN model](https://kpzhang93.github.io/MTCNN_face_detection_alignment/) trained in Caffe._
@@ -19,7 +19,7 @@ _Note: This code supports inference using a pretrained model. Training from scra
   - Deep Learning Toolbox
   - Computer Vision Toolbox
   - Image Processing Toolbox
-- Download the [latest release](TODO_add_link) of the Face Detection and Aligment MTCNN. To install, open the .mltbx file in MATLAB.
+- Download the [latest release](https://github.com/matlab-deep-learning/mtcnn-face-detection/releases/) of the Face Detection and Aligment MTCNN. To install, open the .mltbx file in MATLAB.
 
 ## Getting Started
 
@@ -62,10 +62,10 @@ _Face detection from MTCNN in yellow, detections from the built in vision.Cascad
 
 ## Contribute
 
-Please file any bug reports or feature requests as [GitHub issues](TODO_add_link). In particular comment on the following two issues if they interest you!
+Please file any bug reports or feature requests as [GitHub issues](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues). In particular comment on the following two issues if they interest you!
 
-- [Support training MTCNN](TODO_add_link)
-- [Support MATLAB versions earlier than R2019b](TODO_add_link)
+- [Support training MTCNN](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues/1)
+- [Support MATLAB versions earlier than R2019b](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues/2)
 
 
 _Copyright 2019 The MathWorks, Inc._
