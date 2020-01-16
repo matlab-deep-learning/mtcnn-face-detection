@@ -5,9 +5,9 @@
 This repository implements a deep-learning based face detection and facial landmark localization model using [multi-task cascaded convolutional neural networks (MTCNNs)](https://kpzhang93.github.io/MTCNN_face_detection_alignment/). 
 
 - [📦 Installation](#installation)
-- [�?? Getting Started](#getting-started)
+- [🏁 Getting Started](#getting-started)
 - [🔎😄 Usage](#usage)
-- [�?� About](#about)
+- [❓ About](#about)
 - [💬 Contribute](#contribute)
 
 _Note: This code supports inference using a pretrained model. Training from scratch is not supported. Weights are imported from the [original MTCNN model](https://kpzhang93.github.io/MTCNN_face_detection_alignment/) trained in Caffe._
