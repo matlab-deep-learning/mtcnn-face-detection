@@ -1,0 +1,135 @@
+<deployment-project plugin="plugin.toolbox" plugin-version="1.0">
+  <configuration build-checksum="4177056607" file="C:\code\internal\mtcnn\mtcnn.prj" location="C:\code\internal\mtcnn" name="mtcnn" target="target.toolbox" target-name="Package Toolbox">
+    <param.appname>MTCNN Face Detection</param.appname>
+    <param.authnamewatermark>Justin Pinkney</param.authnamewatermark>
+    <param.email>jpinkney@mathworks.com</param.email>
+    <param.company>MathWorks</param.company>
+    <param.summary>Face detection and landmark localisation using deep learning.</param.summary>
+    <param.description>This repository implements deep learning based face detection and facial landmark localisation using Multi-Task Cascaded CNNs.</param.description>
+    <param.screenshot>${PROJECT_ROOT}\doc\logo.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.output>${PROJECT_ROOT}\MTCNN Face Detection.mltbx</param.output>
+    <param.products.name>
+      <item>Computer Vision Toolbox</item>
+      <item>Deep Learning Toolbox</item>
+      <item>Image Processing Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>96</item>
+      <item>12</item>
+      <item>17</item>
+    </param.products.id>
+    <param.products.version>
+      <item>9.1</item>
+      <item>13.0</item>
+      <item>11.0</item>
+    </param.products.version>
+    <param.platforms />
+    <param.guid>d2cc38da-9b3d-4307-8cfd-4a34d5a442bf</param.guid>
+    <param.exclude.filters />
+    <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
+    <param.examples />
+    <param.demosxml />
+    <param.apps />
+    <param.registered.apps />
+    <param.docs>${PROJECT_ROOT}\code\mtcnn\info.xml</param.docs>
+    <param.getting.started.guide>${PROJECT_ROOT}\code\mtcnn\doc\GettingStarted.mlx</param.getting.started.guide>
+    <param.matlabpath.excludes />
+    <param.javaclasspath.excludes />
+    <param.exported.on.package>false</param.exported.on.package>
+    <param.required.addons />
+    <param.matlab.project.id />
+    <param.matlab.project.name />
+    <param.release.start>R2019b</param.release.start>
+    <param.release.end>latest</param.release.end>
+    <param.release.current.only>false</param.release.current.only>
+    <param.compatiblity.windows>true</param.compatiblity.windows>
+    <param.compatiblity.macos>true</param.compatiblity.macos>
+    <param.compatiblity.linux>true</param.compatiblity.linux>
+    <param.compatiblity.matlabonline>true</param.compatiblity.matlabonline>
+    <param.installation.map />
+    <param.additional.sw.names />
+    <param.additional.sw.licenses />
+    <param.additional.sw.win.url />
+    <param.additional.sw.mac.url />
+    <param.additional.sw.linux.url />
+    <unset>
+      <param.version />
+      <param.output />
+      <param.platforms />
+      <param.exclude.filters />
+      <param.exclude.pcodedmfiles />
+      <param.examples />
+      <param.demosxml />
+      <param.apps />
+      <param.registered.apps />
+      <param.matlabpath.excludes />
+      <param.javaclasspath.excludes />
+      <param.exported.on.package />
+      <param.required.addons />
+      <param.matlab.project.id />
+      <param.matlab.project.name />
+      <param.release.current.only />
+      <param.compatiblity.windows />
+      <param.compatiblity.macos />
+      <param.compatiblity.linux />
+      <param.compatiblity.matlabonline />
+      <param.installation.map />
+      <param.additional.sw.names />
+      <param.additional.sw.licenses />
+      <param.additional.sw.win.url />
+      <param.additional.sw.mac.url />
+      <param.additional.sw.linux.url />
+    </unset>
+    <fileset.rootdir>
+      <file>${PROJECT_ROOT}\code\mtcnn</file>
+    </fileset.rootdir>
+    <fileset.rootfiles>
+      <file>${PROJECT_ROOT}\code\mtcnn\+mtcnn</file>
+      <file>${PROJECT_ROOT}\code\mtcnn\Contents.m</file>
+      <file>${PROJECT_ROOT}\code\mtcnn\doc</file>
+      <file>${PROJECT_ROOT}\code\mtcnn\info.xml</file>
+      <file>${PROJECT_ROOT}\code\mtcnn\mtcnnRoot.m</file>
+      <file>${PROJECT_ROOT}\code\mtcnn\weights</file>
+    </fileset.rootfiles>
+    <fileset.depfun.included />
+    <fileset.depfun.excluded />
+    <fileset.package />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}" name="MTCNN Face Detection.mltbx" optional="false">C:\code\internal\mtcnn\MTCNN Face Detection.mltbx</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2019b</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
