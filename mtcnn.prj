@@ -8,7 +8,7 @@
     <param.description>This repository implements deep learning based face detection and facial landmark localisation using Multi-Task Cascaded CNNs.
 For more details see the GitHub repository: https://github.com/matlab-deep-learning/mtcnn-face-detection</param.description>
     <param.screenshot>${PROJECT_ROOT}\doc\logo.png</param.screenshot>
-    <param.version>1.0</param.version>
+    <param.version>1.0.1</param.version>
     <param.output>${PROJECT_ROOT}\MTCNN Face Detection.mltbx</param.output>
     <param.products.name>
       <item>Computer Vision Toolbox</item>
@@ -55,7 +55,6 @@ For more details see the GitHub repository: https://github.com/matlab-deep-learn
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
-      <param.version />
       <param.output />
       <param.platforms />
       <param.exclude.filters />
