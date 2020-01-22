@@ -1,4 +1,4 @@
-function [bboxes, scores, landmarks] = detectFaces(im)
+function [bboxes, scores, landmarks] = detectFaces(im, varargin)
 % detectFaces   Use a pretrained model to detect faces in an image.
 %
 %   Args:
@@ -34,6 +34,6 @@ function [bboxes, scores, landmarks] = detectFaces(im)
 
 % Copyright 2019 The MathWorks, Inc.
 
-    detector = mtcnn.Detector();
+    detector = mtcnn.Detector(varargin{:});
     [bboxes, scores, landmarks] = detector.detect(im);
 end

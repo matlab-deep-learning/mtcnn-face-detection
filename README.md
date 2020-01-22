@@ -47,7 +47,7 @@ detector = mtcnn.Detector();
 
 The detector object accepts the same optional arguments as the `mtcnn.detectFaces` function.
 
-Refer to the MATLAB toolbox documentation or [click here](docs/gettings_started.md) for a complete example.
+Refer to the MATLAB toolbox documentation or [click here](docs/getting_started.md) for a complete example.
 
 ## About
 
