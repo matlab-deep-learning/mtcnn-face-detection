@@ -11,4 +11,4 @@ jobs:
           path: artifacts
       - store_artifacts:
           path: artifacts/junit
-      - run: bash <(curl -s https://codecov.io/bash) 
+      - run: bash <(curl -s https://codecov.io/bash) -f artifacts/coverage/codeCoverage.xml
