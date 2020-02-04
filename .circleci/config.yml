@@ -7,3 +7,7 @@ jobs:
       - checkout
       - run: wget -qO- --retry-connrefused https://storage.googleapis.com/matlabimagesus/public/install.sh | sudo -E bash
       - run: matlab -batch "runAllTests"
+      - store_test_results:
+        path: artifacts
+      - store_artifacts:
+        path: artifacts/junit
