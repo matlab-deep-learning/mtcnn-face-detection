@@ -70,9 +70,7 @@ classdef Detector < matlab.mixin.SetGet
             %
             %   See also: mtcnn.detectFaces
             
-            if obj.UseGPU()
-                im = gpuArray(single(im));
-            end
+            im = obj.prepImage(im);
             
             bboxes = [];
             scores = [];
@@ -103,7 +101,7 @@ classdef Detector < matlab.mixin.SetGet
             end
             
             %% Stage 2 - Refinement
-            [cropped, bboxes] = obj.prepImages(im, bboxes, obj.RnetSize);
+            [cropped, bboxes] = obj.prepBbox(im, bboxes, obj.RnetSize);
             [probs, correction] = mtcnn.rnet(cropped, obj.RnetWeights);
             [scores, bboxes] = obj.processOutputs(probs, correction, bboxes, 2);
             
@@ -112,7 +110,7 @@ classdef Detector < matlab.mixin.SetGet
             end
             
             %% Stage 3 - Output
-            [cropped, bboxes] = obj.prepImages(im, bboxes, obj.OnetSize);
+            [cropped, bboxes] = obj.prepBbox(im, bboxes, obj.OnetSize);
             
             % Adjust bboxes for the behaviour of imcrop
             bboxes(:, 1:2) = bboxes(:, 1:2) - 0.5;
@@ -144,12 +142,12 @@ classdef Detector < matlab.mixin.SetGet
             obj.OnetWeights = load(fullfile(mtcnnRoot(), "weights", "onet.mat"));
         end
         
-        function [cropped, bboxes] = prepImages(obj, im, bboxes, outputSize)
+        function [cropped, bboxes] = prepBbox(obj, im, bboxes, outputSize)
             % prepImages    Pre-process the images and bounding boxes.
             bboxes = mtcnn.util.makeSquare(bboxes);
             bboxes = round(bboxes);
             cropped = mtcnn.util.cropImage(im, bboxes, outputSize);
-            cropped = dlarray(single(cropped)./255*2 - 1, "SSCB");
+            cropped = dlarray(cropped, "SSCB");
             
         end
         
@@ -166,6 +164,30 @@ classdef Detector < matlab.mixin.SetGet
                                 "RatioType", "Min", ...
                                 "OverlapThreshold", obj.NmsThresholds(netIdx));
             end
+        end
+        
+        function outIm = prepImage(obj, im)
+            % convert the image to the correct scaling and type
+            % All images should be scaled to -1 to 1 and of single type
+            % also place on the GPU if required
+            
+            switch class(im)
+                case "uint8"
+                    outIm = single(im)/255*2 - 1;
+                case "single"
+                    % expect floats to be 0-1 scaled
+                    outIm = im*2 - 1;
+                case "double"
+                    outIm = single(im)*2 - 1;
+                otherwise
+                    error("mtcnn:Detector:UnsupportedType", ...
+                        "Input image is of unsupported type '%s'", class(im));
+            end
+            
+            if obj.UseGPU()
+                outIm = gpuArray(outIm);
+            end
+            
         end
     end
 end
