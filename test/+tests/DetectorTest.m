@@ -12,6 +12,7 @@ classdef DetectorTest < matlab.unittest.TestCase
         imageTypeConversion = struct("uint8", @(x) x, ...
             "single", @(x) single(x)/255, ...
             "double", @(x) double(x)/255)
+        useDagNet = {false, true}
     end
     
     methods (TestClassSetup)
@@ -32,10 +33,10 @@ classdef DetectorTest < matlab.unittest.TestCase
             detector = mtcnn.Detector();
         end
         
-        function testDetectwithDefaults(test, imageTypeConversion)
+        function testDetectwithDefaults(test, imageTypeConversion, useDagNet)
             % Test expected inputs with images of type uint8, single,
             % double (float images are scaled 0-1);
-            detector = mtcnn.Detector();
+            detector = mtcnn.Detector("UseDagNet", useDagNet);
             
             inputImage = imageTypeConversion(test.Image);
             
