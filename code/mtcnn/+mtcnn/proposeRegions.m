@@ -33,7 +33,7 @@ function [bboxes, scores] = proposeRegions(im, scale, threshold, weights)
         return
     end
     
-    linCoord = find(faces);
+    linCoord = find(faces(:));
     [iY, iX] = ind2sub(size(faces), linCoord);
     
     % Generate bounding boxes from positive locations
