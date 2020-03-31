@@ -8,6 +8,12 @@ classdef DetectorTest < matlab.unittest.TestCase
         Reference
     end
     
+    properties (TestParameter)
+        imageTypeConversion = struct("uint8", @(x) x, ...
+            "single", @(x) single(x)/255, ...
+            "double", @(x) double(x)/255)
+    end
+    
     methods (TestClassSetup)
         function setupTestImage(test)
             test.Image = imread("visionteam.jpg");
@@ -26,10 +32,14 @@ classdef DetectorTest < matlab.unittest.TestCase
             detector = mtcnn.Detector();
         end
         
-        function testDetectwithDefaults(test)
+        function testDetectwithDefaults(test, imageTypeConversion)
+            % Test expected inputs with images of type uint8, single,
+            % double (float images are scaled 0-1);
             detector = mtcnn.Detector();
             
-            [bboxes, scores, landmarks] = detector.detect(test.Image);
+            inputImage = imageTypeConversion(test.Image);
+            
+            [bboxes, scores, landmarks] = detector.detect(inputImage);
             
             test.verifyEqual(size(bboxes), [6, 4]);
             test.verifyEqual(size(scores), [6, 1]);
@@ -118,4 +128,4 @@ classdef DetectorTest < matlab.unittest.TestCase
             test.verifyEqual(landmarks, test.Reference.landmarks, "RelTol", 1e-1);
         end
     end
-end
+    end

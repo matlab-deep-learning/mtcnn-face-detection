@@ -2,7 +2,7 @@ function [bboxes, scores] = proposeRegions(im, scale, threshold, weights)
 % proposeRegions    Generate region proposals at a given scale.
 %
 % Args:
-%   im          - Input image 0-255 range
+%   im          - Input image -1 to 1 range, type single
 %   scale       - Scale to run proposal at
 %   threshold   - Confidence threshold to accept proposal
 %   weights     - P-Net weights struct
@@ -19,7 +19,7 @@ function [bboxes, scores] = proposeRegions(im, scale, threshold, weights)
     pnetSize = 12;
     
     im = imresize(im, 1/scale);
-    im = dlarray(single(im)./255*2 - 1, "SSCB");
+    im = dlarray(im, "SSCB");
     
     [probability, correction] = mtcnn.pnet(im, weights);
     
