@@ -13,9 +13,9 @@ classdef DagNetworkStrategy < handle
         
         function load(obj)
             % loadWeights   Load the network weights from file.
-            obj.Pnet = importdata(fullfile(mtcnnRoot(), "weights", "dagPnet.mat"));
-            obj.Rnet = importdata(fullfile(mtcnnRoot(), "weights", "dagRnet.mat"));
-            obj.Onet = importdata(fullfile(mtcnnRoot(), "weights", "dagOnet.mat"));
+            obj.Pnet = importdata(fullfile(mtcnnRoot(), "weights", "dagPNet.mat"));
+            obj.Rnet = importdata(fullfile(mtcnnRoot(), "weights", "dagRNet.mat"));
+            obj.Onet = importdata(fullfile(mtcnnRoot(), "weights", "dagONet.mat"));
         end
         
         function pnet = getPNet(obj)
