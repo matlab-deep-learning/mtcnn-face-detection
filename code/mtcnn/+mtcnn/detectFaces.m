@@ -24,6 +24,9 @@ function [bboxes, scores, landmarks] = detectFaces(im, varargin)
 %                                     (default=[0.5, 0.5, 0.5])
 %            - UseGPU               - Use GPU for processing or not
 %                                     (default=false)
+%            - UseDagNet            - Use DAGNetwork for prediction (for
+%                                     compatibility with R2019a)
+%                                     (default=false R2019b+, =true R2019a)
 % 
 %   Note:
 %       The 5 landmarks detector are in the order:

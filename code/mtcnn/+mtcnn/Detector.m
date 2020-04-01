@@ -25,6 +25,9 @@ classdef Detector < matlab.mixin.SetGet
         UseGPU = false
         % Use DAG Network for pre 19b compatibility
         UseDagNet = verLessThan('matlab', '9.7')
+    end
+    
+    properties (Access=private)
         % An object providing an inteface to the networks
         Networks
     end
