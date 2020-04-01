@@ -25,5 +25,15 @@ classdef preluLayer < nnet.layer.Layer
             % layer and outputs the result Z.
             Z = max(X,0) + layer.Alpha .* min(0,X);
         end
+        
+        function [dLdX, dLdAlpha] = backward(layer, X, ~, dLdZ, ~)
+            dLdX = layer.Alpha .* dLdZ;
+            dLdX(X>0) = dLdZ(X>0);
+            dLdAlpha = min(0,X) .* dLdZ;
+            dLdAlpha = sum(sum(dLdAlpha,1),2);
+            
+            % Sum over all observations in mini-batch.
+            dLdAlpha = sum(dLdAlpha,4);
+        end
     end
 end

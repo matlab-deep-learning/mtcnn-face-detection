@@ -24,7 +24,7 @@ classdef Detector < matlab.mixin.SetGet
         % Use GPU for processing or not
         UseGPU = false
         % Use DAG Network for pre 19b compatibility
-        UseDagNet = false
+        UseDagNet = verLessThan('matlab', '9.7')
         % An object providing an inteface to the networks
         Networks
     end
@@ -129,6 +129,14 @@ classdef Detector < matlab.mixin.SetGet
             bboxes= gather(double(bboxes));
             scores = gather(double(scores));
             landmarks = gather(double(landmarks));
+        end
+        
+        function set.UseDagNet(obj, val)
+            if verLessThan('matlab', '9.7') && val
+                warning("mtcnn:Detector:pre19b", ...
+                    "For use in R2019a UseDagNet must be set to true");
+            end
+            obj.UseDagNet = val;
         end
     end
     
