@@ -14,7 +14,12 @@ function [bboxes, scores] = proposeRegions(im, scale, threshold, weightsOrNet)
 % Copyright 2019 The MathWorks, Inc.
 
     useDagNet = isa(weightsOrNet, "DAGNetwork");
-    assert(isa(im, "single"), "mtcnn:proposeRegions:wrongImageType", ...
+    if isa(im, "gpuArray")
+        imClass = classUnderlying(im);
+    else
+        imClass = class(im);
+    end
+    assert(imClass == "single", "mtcnn:proposeRegions:wrongImageType", ...
         "Input image should be a single scale -1 to 1");
 
     % Stride of the proposal network
