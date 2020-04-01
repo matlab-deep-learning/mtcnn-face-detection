@@ -23,6 +23,13 @@ classdef Detector < matlab.mixin.SetGet
         NmsThresholds = [0.5, 0.5, 0.5]
         % Use GPU for processing or not
         UseGPU = false
+        % Use DAG Network for pre 19b compatibility
+        UseDagNet = verLessThan('matlab', '9.7')
+    end
+    
+    properties (Access=private)
+        % An object providing an inteface to the networks
+        Networks
     end
     
     properties (Constant)
@@ -32,28 +39,23 @@ classdef Detector < matlab.mixin.SetGet
         OnetSize = 48
     end
     
-    properties (SetAccess=private)
-        % Weights for the networks
-        PnetWeights
-        RnetWeights
-        OnetWeights
-    end
     
     methods
         function obj = Detector(varargin)
             % Create an mtcnn.Detector object
             
-            obj.loadWeights();
-            
             if nargin > 1
                 obj.set(varargin{:});
             end
             
-            if obj.UseGPU()
-                obj.PnetWeights = dlupdate(@gpuArray, obj.PnetWeights);
-                obj.RnetWeights = dlupdate(@gpuArray, obj.RnetWeights);
-                obj.OnetWeights = dlupdate(@gpuArray, obj.OnetWeights);
+            if obj.UseDagNet
+                obj.Networks = mtcnn.util.DagNetworkStrategy();
+            else
+                obj.Networks = mtcnn.util.DlNetworkStrategy(obj.UseGPU);
             end
+            
+            obj.Networks.load();
+            
         end
         
         function [bboxes, scores, landmarks] = detect(obj, im)
@@ -87,7 +89,7 @@ classdef Detector < matlab.mixin.SetGet
                 [thisBox, thisScore] = ...
                     mtcnn.proposeRegions(im, scale, ...
                                             obj.ConfidenceThresholds(1), ...
-                                            obj.PnetWeights);
+                                            obj.Networks.getPNet());
                 bboxes = cat(1, bboxes, thisBox);
                 scores = cat(1, scores, thisScore);
             end
@@ -102,7 +104,7 @@ classdef Detector < matlab.mixin.SetGet
             
             %% Stage 2 - Refinement
             [cropped, bboxes] = obj.prepBbox(im, bboxes, obj.RnetSize);
-            [probs, correction] = mtcnn.rnet(cropped, obj.RnetWeights);
+            [probs, correction] = obj.Networks.applyRNet(cropped);
             [scores, bboxes] = obj.processOutputs(probs, correction, bboxes, 2);
             
             if isempty(scores)
@@ -116,14 +118,13 @@ classdef Detector < matlab.mixin.SetGet
             bboxes(:, 1:2) = bboxes(:, 1:2) - 0.5;
             bboxes(:, 3:4) = bboxes(:, 3:4) + 1;
             
-            [probs, correction, landmarks] = mtcnn.onet(cropped, obj.OnetWeights);
+            [probs, correction, landmarks] = obj.Networks.applyONet(cropped);
             
             % landmarks are relative to uncorrected bbox
-            landmarks = extractdata(landmarks)';
             x = bboxes(:, 1) + landmarks(:, 1:5).*(bboxes(:, 3));
             y = bboxes(:, 2) + landmarks(:, 6:10).*(bboxes(:, 4));
             landmarks = cat(3, x, y);
-            landmarks(extractdata(probs(2, :))' < obj.ConfidenceThresholds(3), :, :) = [];
+            landmarks(probs(:, 2) < obj.ConfidenceThresholds(3), :, :) = [];
             
             [scores, bboxes] = obj.processOutputs(probs, correction, bboxes, 3);
             
@@ -132,30 +133,28 @@ classdef Detector < matlab.mixin.SetGet
             scores = gather(double(scores));
             landmarks = gather(double(landmarks));
         end
+        
+        function set.UseDagNet(obj, val)
+            if verLessThan('matlab', '9.7') && val
+                warning("mtcnn:Detector:pre19b", ...
+                    "For use in R2019a UseDagNet must be set to true");
+            end
+            obj.UseDagNet = val;
+        end
     end
     
     methods (Access=private)
-        function loadWeights(obj)
-            % loadWeights   Load the network weights from file.
-            obj.PnetWeights = load(fullfile(mtcnnRoot(), "weights", "pnet.mat"));
-            obj.RnetWeights = load(fullfile(mtcnnRoot(), "weights", "rnet.mat"));
-            obj.OnetWeights = load(fullfile(mtcnnRoot(), "weights", "onet.mat"));
-        end
-        
         function [cropped, bboxes] = prepBbox(obj, im, bboxes, outputSize)
             % prepImages    Pre-process the images and bounding boxes.
             bboxes = mtcnn.util.makeSquare(bboxes);
             bboxes = round(bboxes);
             cropped = mtcnn.util.cropImage(im, bboxes, outputSize);
-            cropped = dlarray(cropped, "SSCB");
-            
         end
         
         function [scores, bboxes] = ...
                 processOutputs(obj, probs, correction, bboxes, netIdx)
             % processOutputs    Post-process the output values.
-            faceProbs = extractdata(probs(2, :))';
-            correction = extractdata(correction)';
+            faceProbs = probs(:, 2);
             bboxes = mtcnn.util.applyCorrection(bboxes, correction);
             bboxes(faceProbs < obj.ConfidenceThresholds(netIdx), :) = [];
             scores = faceProbs(faceProbs > obj.ConfidenceThresholds(netIdx));

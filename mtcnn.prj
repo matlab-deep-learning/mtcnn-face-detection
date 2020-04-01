@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="4177056607" file="C:\code\internal\mtcnn-face-detection\mtcnn.prj" location="C:\code\internal\mtcnn-face-detection" name="mtcnn" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="1307712866" file="C:\code\internal\mtcnn-face-detection\mtcnn.prj" location="C:\code\internal\mtcnn-face-detection" name="mtcnn" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>MTCNN Face Detection</param.appname>
     <param.authnamewatermark>Justin Pinkney</param.authnamewatermark>
     <param.email>jpinkney@mathworks.com</param.email>
@@ -8,7 +8,7 @@
     <param.description>This repository implements deep learning based face detection and facial landmark localisation using Multi-Task Cascaded CNNs.
 For more details see the GitHub repository: https://github.com/matlab-deep-learning/mtcnn-face-detection</param.description>
     <param.screenshot>${PROJECT_ROOT}\doc\logo.png</param.screenshot>
-    <param.version>1.0.1</param.version>
+    <param.version>1.2.0</param.version>
     <param.output>${PROJECT_ROOT}\MTCNN Face Detection.mltbx</param.output>
     <param.products.name>
       <item>Computer Vision Toolbox</item>
@@ -41,7 +41,7 @@ For more details see the GitHub repository: https://github.com/matlab-deep-learn
     <param.required.addons />
     <param.matlab.project.id />
     <param.matlab.project.name />
-    <param.release.start>R2019b</param.release.start>
+    <param.release.start>R2019a</param.release.start>
     <param.release.end>latest</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>

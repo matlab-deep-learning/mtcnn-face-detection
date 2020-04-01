@@ -1,6 +1,6 @@
 # Face Detection and Alignment MTCNN
 
-![matlab-deep-learning](https://circleci.com/gh/matlab-deep-learning/mtcnn-face-detection.svg?style=svg)
+![circleci](https://circleci.com/gh/matlab-deep-learning/mtcnn-face-detection.svg?style=svg)
 [![codecov](https://codecov.io/gh/matlab-deep-learning/mtcnn-face-detection/branch/master/graph/badge.svg)](https://codecov.io/gh/matlab-deep-learning/mtcnn-face-detection)
 
 ## [__Download the toolbox here__](https://github.com/matlab-deep-learning/mtcnn-face-detection/releases/latest/download/MTCNN-Face-Detection.mltbx)
@@ -18,7 +18,7 @@ _Note: This code supports inference using a pretrained model. Training from scra
 ## Installation
 
 - Face Detection and Alignment MTCNN requires the following products:
-  - MATLAB R2019b or later
+  - MATLAB R2019a or later (_now works in R2019a and later!_)
   - Deep Learning Toolbox
   - Computer Vision Toolbox
   - Image Processing Toolbox
@@ -65,10 +65,6 @@ _Face detection from MTCNN in yellow, detections from the built in vision.Cascad
 
 ## Contribute
 
-Please file any bug reports or feature requests as [GitHub issues](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues). In particular comment on the following two issues if they interest you!
-
-- [Support training MTCNN](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues/1)
-- [Support MATLAB versions earlier than R2019b](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues/2)
-
+Please file any bug reports or feature requests as [GitHub issues](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues). In particular if you'd be interested in training your own MTCNN network comment on the following issue: [Support training MTCNN](https://github.com/matlab-deep-learning/mtcnn-face-detection/issues/1)
 
 _Copyright 2019 The MathWorks, Inc._
