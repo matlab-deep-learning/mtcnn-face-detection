@@ -1,4 +1,4 @@
-function [bboxes, scores] = proposeRegions(im, scale, threshold, weightsOrNet)
+function [bboxes, scores] = proposeRegions(im, scale, threshold, networkStrategy)
 % proposeRegions    Generate region proposals at a given scale.
 %
 % Args:
@@ -13,14 +13,6 @@ function [bboxes, scores] = proposeRegions(im, scale, threshold, weightsOrNet)
 
 % Copyright 2019 The MathWorks, Inc.
 
-    useDagNet = isa(weightsOrNet, "DAGNetwork");
-    if isa(im, "gpuArray")
-        imClass = classUnderlying(im);
-    else
-        imClass = class(im);
-    end
-    assert(imClass == "single", "mtcnn:proposeRegions:wrongImageType", ...
-        "Input image should be a single scale -1 to 1");
 
     % Stride of the proposal network
     stride = 2;
@@ -28,19 +20,8 @@ function [bboxes, scores] = proposeRegions(im, scale, threshold, weightsOrNet)
     pnetSize = 12;
     
     im = imresize(im, 1/scale);
-    
-    if useDagNet
-        % need to use activations as we don't know what size it will be
-        result = weightsOrNet.activations(im, "concat");
-        probability = gather(result(:,:,1:2,:));
-        correction = gather(result(:,:,3:end,:));
-    else
-        im = dlarray(im, "SSCB");
-        [probability, correction] = mtcnn.pnet(im, weightsOrNet);
-        probability = extractdata(gather(probability));
-        correction = extractdata(gather(correction));
-    end
-    
+
+    [probability, correction] = networkStrategy.applyPNet(im);
     
     faces = probability(:,:,2) > threshold;
     if sum(faces, 'all') == 0

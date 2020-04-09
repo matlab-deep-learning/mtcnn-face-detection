@@ -112,12 +112,14 @@ classdef DetectorTest < matlab.unittest.TestCase
         end
         
         %% GPU
-        function testGpuDetect(test)
+        function testGpuDetect(test, imageTypeConversion, useDagNet)
+            
             % filter if no GPU present
             test.assumeGreaterThan(gpuDeviceCount, 0);
             
-            detector = mtcnn.Detector("UseGPU", true);
-            [bboxes, scores, landmarks] = detector.detect(test.Image);
+            inputImage = imageTypeConversion(test.Image);
+            detector = mtcnn.Detector("UseGPU", true, "UseDagNet", useDagNet);
+            [bboxes, scores, landmarks] = detector.detect(inputImage);
             
             test.verifyEqual(size(bboxes), [6, 4]);
             test.verifyEqual(size(scores), [6, 1]);
