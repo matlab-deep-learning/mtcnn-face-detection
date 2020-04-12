@@ -8,17 +8,18 @@ classdef ProposeRegionsTest < matlab.unittest.TestCase
     end
     
     properties (TestParameter)
-        getNet = struct("weights", @() load(fullfile(mtcnnRoot, "weights", "pnet.mat")), ...
-            "net", @() importdata(fullfile(mtcnnRoot, "weights", "dagPNet.mat")));
+        getNet = struct("dl", @() mtcnn.util.DlNetworkStrategy(false) , ...
+                        "dag", @() mtcnn.util.DagNetworkStrategy(false));
     end
     
     methods (Test)
         function testOutputs(test, getNet)
             scale = 2;
             conf = 0.5;
-            weights = getNet();
+            strategy = getNet();
+            strategy.load();
             
-            [box, score] = mtcnn.proposeRegions(test.Image, scale, conf, weights);
+            [box, score] = mtcnn.proposeRegions(test.Image, scale, conf, strategy);
             
             test.verifyOutputs(box, score);
         end
@@ -29,9 +30,10 @@ classdef ProposeRegionsTest < matlab.unittest.TestCase
             cropped = imcrop(test.Image, [300, 42, 65, 38]);
             scale = 3;
             conf = 0.5;
-            weights = getNet();
+            strategy = getNet();
+            strategy.load();
             
-            [box, score] = mtcnn.proposeRegions(cropped, scale, conf, weights);
+            [box, score] = mtcnn.proposeRegions(cropped, scale, conf, strategy);
             
             test.verifyOutputs(box, score);
         end

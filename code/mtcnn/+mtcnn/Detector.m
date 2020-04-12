@@ -49,7 +49,7 @@ classdef Detector < matlab.mixin.SetGet
             end
             
             if obj.UseDagNet
-                obj.Networks = mtcnn.util.DagNetworkStrategy();
+                obj.Networks = mtcnn.util.DagNetworkStrategy(obj.UseGPU);
             else
                 obj.Networks = mtcnn.util.DlNetworkStrategy(obj.UseGPU);
             end
@@ -89,7 +89,7 @@ classdef Detector < matlab.mixin.SetGet
                 [thisBox, thisScore] = ...
                     mtcnn.proposeRegions(im, scale, ...
                                             obj.ConfidenceThresholds(1), ...
-                                            obj.Networks.getPNet());
+                                            obj.Networks);
                 bboxes = cat(1, bboxes, thisBox);
                 scores = cat(1, scores, thisScore);
             end
@@ -183,7 +183,7 @@ classdef Detector < matlab.mixin.SetGet
                         "Input image is of unsupported type '%s'", class(im));
             end
             
-            if obj.UseGPU()
+            if obj.UseGPU && ~obj.UseDagNet
                 outIm = gpuArray(outIm);
             end
             

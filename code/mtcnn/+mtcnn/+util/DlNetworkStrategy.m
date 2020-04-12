@@ -26,8 +26,13 @@ classdef DlNetworkStrategy < handle
             end
         end
         
-        function pnet = getPNet(obj)
-            pnet = obj.PnetWeights;
+        function [probability, correction] = applyPNet(obj, im)
+            im = dlarray(im, "SSCB");
+            
+            [probability, correction] = mtcnn.pnet(im, obj.PnetWeights);
+            
+            probability = extractdata(gather(probability));
+            correction = extractdata(gather(correction));
         end
         
         function [probs, correction] = applyRNet(obj, im)
