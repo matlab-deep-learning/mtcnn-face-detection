@@ -11,7 +11,7 @@ jobs:
       - checkout
       - matlab/install
       - matlab/run-tests:
-          test-results-junit: artifacts/coverage/testResults.xml
+          test-results-junit: artifacts/junit/testResults.xml
           code-coverage-cobertura: artifacts/coverage/codeCoverage.xml
           source-folder: code
       - store_test_results:
