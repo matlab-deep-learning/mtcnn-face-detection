@@ -1,6 +1,6 @@
 # Face Detection and Alignment MTCNN
 
-![circleci](https://circleci.com/gh/matlab-deep-learning/mtcnn-face-detection.svg?style=svg)
+[![circleci](https://circleci.com/gh/acampbel/mtcnn-face-detection.svg?style=svg)](https://circleci.com/gh/acampbel/mtcnn-face-detection) 
 [![codecov](https://codecov.io/gh/matlab-deep-learning/mtcnn-face-detection/branch/master/graph/badge.svg)](https://codecov.io/gh/matlab-deep-learning/mtcnn-face-detection)
 
 ## [__Download the toolbox here__](https://github.com/matlab-deep-learning/mtcnn-face-detection/releases/latest/download/MTCNN-Face-Detection.mltbx)
