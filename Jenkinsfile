@@ -8,7 +8,7 @@ pipeline {
             steps
             {
                 runMATLABTests(
-                               testResultsJUnit: 'matlabTestArtifacts/junittestresults.xml'
+                               testResultsJUnit: 'matlabTestArtifacts/junittestresults.xml',
                                codeCoverageCobertura: 'matlabTestArtifacts/cobertura.xml'
                               )
              }
