@@ -37,6 +37,10 @@ classdef ProposeRegionsTest < matlab.unittest.TestCase
             
             test.verifyOutputs(box, score);
         end
+        
+        function testAFailure(testCase)
+            testCase.verifyFail("This is a deliberate failure.");
+        end
     end
     
     methods
