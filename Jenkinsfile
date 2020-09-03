@@ -10,6 +10,7 @@ pipeline {
                     testResultsJUnit: 'matlabTestArtifacts/junittestresults.xml',
                     codeCoverageCobertura: 'matlabTestArtifacts/cobertura.xml'
                     )
+                junit 'matlabTestArtifacts/junittestreport.xml'
             }
         }
     }
