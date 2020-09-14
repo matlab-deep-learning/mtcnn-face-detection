@@ -1,14 +1,22 @@
-version: 2
+version: 2.1
+orbs:
+  matlab: mathworks/matlab@0.2
+  codecov: codecov/codecov@1.0.2
+
 jobs:
   build:
     machine:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
-      - run: wget -qO- --retry-connrefused https://storage.googleapis.com/matlabimagesus/public/install.sh | sudo -E bash
-      - run: matlab -batch "runAllTests"
+      - matlab/install
+      - matlab/run-tests:
+          test-results-junit: artifacts/junit/testResults.xml
+          code-coverage-cobertura: artifacts/coverage/codeCoverage.xml
+          source-folder: code
       - store_test_results:
-          path: artifacts
-      - store_artifacts:
           path: artifacts/junit
-      - run: bash <(curl -s https://codecov.io/bash) -f artifacts/coverage/codeCoverage.xml
+      - store_artifacts: 
+          path: artifacts
+      - codecov/upload:
+          file: artifacts/coverage/codeCoverage.xml
