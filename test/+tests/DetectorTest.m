@@ -131,4 +131,4 @@ classdef DetectorTest < matlab.unittest.TestCase
             test.verifyEqual(landmarks, test.Reference.landmarks, "RelTol", 1e-1);
         end
     end
-    end
+end
