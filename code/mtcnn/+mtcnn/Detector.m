@@ -126,7 +126,7 @@ classdef Detector < matlab.mixin.SetGet
             landmarks = cat(3, x, y);
             landmarks(probs(:, 2) < obj.ConfidenceThresholds(3), :, :) = [];
             
-            [scores, bboxes] = obj.processOutputs(probs, correction, bboxes, 3);
+            [scores, bboxes, landmarks] = obj.processOutputs(probs, correction, bboxes, 3, landmarks);
             
             % Gather and cast the outputs
             bboxes= gather(double(bboxes));
@@ -151,17 +151,20 @@ classdef Detector < matlab.mixin.SetGet
             cropped = mtcnn.util.cropImage(im, bboxes, outputSize);
         end
         
-        function [scores, bboxes] = ...
-                processOutputs(obj, probs, correction, bboxes, netIdx)
+        function [scores, bboxes, landmarks] = ...
+                processOutputs(obj, probs, correction, bboxes, netIdx, landmarks)
             % processOutputs    Post-process the output values.
             faceProbs = probs(:, 2);
             bboxes = mtcnn.util.applyCorrection(bboxes, correction);
             bboxes(faceProbs < obj.ConfidenceThresholds(netIdx), :) = [];
-            scores = faceProbs(faceProbs > obj.ConfidenceThresholds(netIdx));
+            scores = faceProbs(faceProbs >= obj.ConfidenceThresholds(netIdx));
             if ~isempty(scores) 
-                [bboxes, ~] = selectStrongestBbox(gather(bboxes), scores, ...
+                [bboxes, scores, index] = selectStrongestBbox(gather(bboxes), scores, ...
                                 "RatioType", "Min", ...
                                 "OverlapThreshold", obj.NmsThresholds(netIdx));
+                if netIdx == 3
+                    landmarks = landmarks(index, :, :);
+                end
             end
         end
         
