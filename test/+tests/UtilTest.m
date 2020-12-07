@@ -85,5 +85,8 @@ classdef UtilTest < matlab.unittest.TestCase
             
             test.verifyEqual(corrected, expected);
         end
+        function testFailure(testCase)
+            testCase.verifyFail('Intentional failure for demo purposes');
+        end
     end
 end
