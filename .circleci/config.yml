@@ -5,6 +5,11 @@ orbs:
 
 jobs:
   test:
+    parameters:
+      version:
+        description: "MATLAB version"
+        default: "R2020b"
+        type: string
     machine:
       image: ubuntu-1604:201903-01
     steps:
