@@ -26,8 +26,8 @@ function [probability, correction] = rnet(x, weights)
     end
     
     nBatch = size(x,4);
-    x = permute(stripdims(x), [4, 1, 2, 3]);
-    x = dlarray(reshape(x, nBatch, []), "BC");
+%     x = permute(stripdims(x), [4, 1, 2, 3]);
+%     x = dlarray(reshape(x, nBatch, []), "BC");
 
     x = fullyconnect(x, weights.features_conv4_weight, weights.features_conv4_bias);
     x = mtcnn.util.prelu(x, weights.features_prelu4_weight);
