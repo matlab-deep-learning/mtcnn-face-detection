@@ -1,15 +1,16 @@
 version: 2.1
 orbs:
-  matlab: mathworks/matlab@0.2
+  matlab: mathworks/matlab@0.3.0
   codecov: codecov/codecov@1.0.2
 
 jobs:
-  build:
+  test:
     machine:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
-      - matlab/install
+      - matlab/install:
+          release: <<parameters.version>>
       - matlab/run-tests:
           test-results-junit: artifacts/junit/testResults.xml
           code-coverage-cobertura: artifacts/coverage/codeCoverage.xml
@@ -20,3 +21,13 @@ jobs:
           path: artifacts
       - codecov/upload:
           file: artifacts/coverage/codeCoverage.xml
+
+workflows:
+  matrix-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              version:
+                - R2020a
+                - R2020b
