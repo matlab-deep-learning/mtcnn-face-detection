@@ -13,8 +13,7 @@ function net = convertToDagNet(stage)
         case "r"
             inputSize = 24;
             nBlocks = 4;
-            finalConnections = [sprintf("prelu_%d", nBlocks-1), "fc_1";
-                                "fc_1", sprintf("prelu_%d", nBlocks)];
+            finalConnections = ["fc_1", sprintf("prelu_%d", nBlocks)];
             catConnections = ["sm_1", "fc_3"];
         case "o"
             inputSize = 48;
@@ -45,7 +44,11 @@ function net = convertToDagNet(stage)
             output = cat(1, a, b, c);
     end
     
-    lgraph = functionToLayerGraph(netFunc, input);
+    if strcmp(version('-release'), "2020b")
+        lgraph = functionToLayerGraph(netFunc, input, "GenerateLayer", "placeholder-layer");
+    else
+        lgraph = functionToLayerGraph(netFunc, input);
+    end
     placeholders = findPlaceholderLayers(lgraph);
     lgraph = removeLayers(lgraph, {placeholders.Name});
 
