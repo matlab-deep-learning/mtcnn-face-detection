@@ -36,7 +36,7 @@ jobs:
           code-coverage-cobertura: artifacts/coverage.xml 
           
       - name: Upload Artifacts  
-        uses: actions/upload-artifacts@v2
+        uses: actions/upload-artifact@v2
         with:
           name: artifacts
           path: artifacts/   
