@@ -41,7 +41,7 @@ jobs:
           name: artifacts
           path: artifacts/   
           
-      - name: XUnit Viewer
-        uses: AutoModality/action-xunit-viewer@v1.0.1
-        with:
-          results: artifacts/testResults.xml
+#      - name: XUnit Viewer
+ #       uses: AutoModality/action-xunit-viewer@v1.0.1
+  #      with:
+   #       results: artifacts/testResults.xml
