@@ -11,7 +11,7 @@ suite = testsuite(pwd, 'IncludeSubfolders', true);
 [~,~] = mkdir('public/code-coverage');
 
 runner = TestRunner.withTextOutput('OutputDetail', Verbosity.Detailed);
-runner.addPlugin(TestReportPlugin.producingHTML('public/test-results'));
+runner.addPlugin(TestReportPlugin.producingHTML('public/test-results','IncludingPassingDiagnostics',true));
 runner.addPlugin(CodeCoveragePlugin.forFolder({'code'}, 'IncludingSubfolders', true, 'Producing', CoverageReport('public/code-coverage')));
 
 results = runner.run(suite);
