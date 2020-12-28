@@ -30,16 +30,24 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run all tests
-        uses: matlab-actions/run-tests@v0
+        uses: matlab-actions/run-command@v0
         with:
-          test-results-junit: artifacts/testResults.xml
-          code-coverage-cobertura: artifacts/coverage.xml 
+          command: runAllTests
           
       - name: Upload Artifacts  
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
           path: artifacts/   
+          
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}:  
           
 #      - name: XUnit Viewer
  #       uses: AutoModality/action-xunit-viewer@v1.0.1
