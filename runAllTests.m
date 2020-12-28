@@ -2,8 +2,8 @@ function runAllTests
 import matlab.unittest.TestRunner;
 import matlab.unittest.Verbosity;
 import matlab.unittest.plugins.CodeCoveragePlugin;
-import matlab.unittest.plugins.XMLPlugin;
-import matlab.unittest.plugins.codecoverage.CoberturaFormat;
+import matlab.unittest.plugins.TestReportPlugin;
+import matlab.unittest.plugins.codecoverage.CoverageReport;
 
 suite = testsuite(pwd, 'IncludeSubfolders', true);
 
