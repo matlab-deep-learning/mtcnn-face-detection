@@ -12,7 +12,7 @@ suite = testsuite(pwd, 'IncludeSubfolders', true);
 
 runner = TestRunner.withTextOutput('OutputDetail', Verbosity.Detailed);
 runner.addPlugin(TestReportPlugin.producingHTML('public/test-results'));
-runner.addPlugin(CodeCoveragePlugin.forFolder({'.'}, 'IncludingSubfolders', true, 'Producing', CoverageReport('public/code-coverage')));
+runner.addPlugin(CodeCoveragePlugin.forFolder({'code'}, 'IncludingSubfolders', true, 'Producing', CoverageReport('public/code-coverage')));
 
 results = runner.run(suite);
 
