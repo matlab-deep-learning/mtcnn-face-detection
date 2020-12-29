@@ -14,9 +14,9 @@ for thisResultIdx = numel(results):-1:1
     b.name = thisResult.Name;
     samples =  height(thisResult.Samples);
     b.iterations = samples;
-    b.real_time = round(sum(thisResult.Samples.MeasuredTime)/samples*1e9);
+    b.real_time = round(median(thisResult.Samples.MeasuredTime)*1e3);
     b.cpu_time = b.real_time;
-    b.time_unit = "ns";
+    b.time_unit = "s";
     b.threads = 1;
     
     benchmarks(thisResultIdx) = b;
