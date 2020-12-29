@@ -54,15 +54,14 @@ jobs:
           echo '  </body>' >> public/index.html
           echo '</html>' >> public/index.html
         
-      #- name: Publish Results 🚀
-       # uses: JamesIves/github-pages-deploy-action@3.7.1
-        #with:
-         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          #BRANCH: gh-pages # The branch the action should deploy to.
-          #FOLDER: public # The folder the action should deploy.
-          #CLEAN: true # 
-          #CLEAN_EXCLUDE: ["dev"]
-            # Runs a set of commands using the runners shell
+      - name: Publish Results 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: public # The folder the action should deploy.
+          CLEAN: true # 
+          CLEAN_EXCLUDE: ["dev"]
     
       - name: Run performance tests
         uses: matlab-actions/run-command@v0
