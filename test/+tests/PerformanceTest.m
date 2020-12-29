@@ -37,8 +37,8 @@ classdef PerformanceTest < matlab.perftest.TestCase
             im = imresize(im, imSize);
             
             test.startMeasuring();
-            [bboxes, scores, landmarks] = mtcnn.detectFaces(im);
-            [bboxes, scores, landmarks] = mtcnn.detectFaces(im);
+           % [bboxes, scores, landmarks] = mtcnn.detectFaces(im);
+           % [bboxes, scores, landmarks] = mtcnn.detectFaces(im);
             [bboxes, scores, landmarks] = mtcnn.detectFaces(im);
             test.stopMeasuring();
         end
