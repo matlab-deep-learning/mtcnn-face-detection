@@ -50,4 +50,5 @@ jobs:
           fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
-      # Upload the updated cache file for the next job by actions/cache
+          comment-on-alert: true
+          alert-comment-cc-users: '@acampbel'
