@@ -10,18 +10,17 @@ c.host_name = results(1).Samples.Host(1);
 
 samples = vertcat(results.Samples);
 
-for thisResultIdx = numel(results):-1:1
-    thisResult = results(thisResultIdx);
+for thisSampleIdx = height(samples):-1:1
+    thisSample = samples(thisSampleIdx,:);
     b = struct;
-    b.name = thisResult.Name;
-    iterations =  numel(thisResult.Samples);
-    b.iterations = 
+    b.name = thisSample.Name;
+    b.iterations = 1;
     b.real_time = round(thisSample.MeasuredTime*1e9);
     b.cpu_time = b.real_time;
     b.time_unit = "ns";
     b.threads = 1;
     
-    benchmarks(thisResultIdx) = b;
+    benchmarks(thisSampleIdx) = b;
 end
 
 s.context = c;
