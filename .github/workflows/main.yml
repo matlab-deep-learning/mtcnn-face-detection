@@ -81,7 +81,7 @@ jobs:
           # What benchmark tool the output.txt came from
           tool: 'googlecpp'
           output-file-path: benchmark-data.json
-          fail-on-alert: true
+          #fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           comment-on-alert: true
