@@ -61,7 +61,7 @@ jobs:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: public # The folder the action should deploy.
           CLEAN: true # 
-          #CLEAN_EXCLUDE: '["dev"]'
+          CLEAN_EXCLUDE: '["dev"]'
     
       - name: Run performance tests
         uses: matlab-actions/run-command@v0
