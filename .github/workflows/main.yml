@@ -48,8 +48,8 @@ jobs:
           echo '    <title>Job Results</title>' >> public/index.html
           echo '  </head>' >> public/index.html
           echo '  <body>' >> public/index.html
-          echo '    <a href="test-results/index.html">Test Results</a>' >> public/index.html
-          echo '    <a href="code-coverage/index.html">Code Coverage</a>' >> public/index.html
+          echo '    <p><a href="test-results/index.html">Test Results</a></p>' >> public/index.html
+          echo '    <p><a href="code-coverage/index.html">Code Coverage</a></p>' >> public/index.html
           echo '  </body>' >> public/index.html
           echo '</html>' >> public/index.html
         
