@@ -50,6 +50,7 @@ jobs:
           echo '  <body>' >> public/index.html
           echo '    <p><a href="test-results/index.html">Test Results</a></p>' >> public/index.html
           echo '    <p><a href="code-coverage/index.html">Code Coverage</a></p>' >> public/index.html
+          echo '    <p><a href="dev/bench/index.html">Performance Results</a></p>' >> public/index.html
           echo '  </body>' >> public/index.html
           echo '</html>' >> public/index.html
         
@@ -59,8 +60,31 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: public # The folder the action should deploy.
-          CLEAN: true # 
-      
+          #CLEAN: true # 
+            # Runs a set of commands using the runners shell
+    
+      - name: Run performance tests
+        uses: matlab-actions/run-command@v0
+        with:
+          command: runPerfTests
+
+      - name: Download previous benchmark data
+        uses: actions/cache@v1
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-benchmark
+
+      - name: Store benchmark result
+        uses: rhysd/github-action-benchmark@v1
+        with:
+          # What benchmark tool the output.txt came from
+          tool: 'googlecpp'
+          output-file-path: benchmark-data.json
+          fail-on-alert: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          comment-on-alert: true
+          alert-comment-cc-users: '@acampbel'
  
           
 #      - name: XUnit Viewer
