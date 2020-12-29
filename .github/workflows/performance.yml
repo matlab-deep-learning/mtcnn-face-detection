@@ -48,4 +48,6 @@ jobs:
           output-file-path: benchmark-data.json
           external-data-json-path: ./cache/benchmark-data.json
           fail-on-alert: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
       # Upload the updated cache file for the next job by actions/cache
