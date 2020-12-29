@@ -54,12 +54,12 @@ jobs:
           echo '  </body>' >> public/index.html
           echo '</html>' >> public/index.html
         
-      - name: Publish Results 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: public # The folder the action should deploy.
+      #- name: Publish Results 🚀
+       # uses: JamesIves/github-pages-deploy-action@3.7.1
+        #with:
+         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #BRANCH: gh-pages # The branch the action should deploy to.
+          #FOLDER: public # The folder the action should deploy.
           #CLEAN: true # 
             # Runs a set of commands using the runners shell
     
@@ -87,7 +87,3 @@ jobs:
           alert-comment-cc-users: '@acampbel'
  
           
-#      - name: XUnit Viewer
- #       uses: AutoModality/action-xunit-viewer@v1.0.1
-  #      with:
-   #       results: artifacts/testResults.xml
