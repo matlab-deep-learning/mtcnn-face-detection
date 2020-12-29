@@ -42,16 +42,16 @@ jobs:
 
       - name: Create public index
         run: |
-          echo "<!DOCTYPE html>" >> public/index.html
-          echo "<html>" >> public/index.html" >> public/index.html
-          echo "  <head>" >> public/index.html
-          echo "    <title>Job Results</title>" >> public/index.html
-          echo "  </head>" >> public/index.html
-          echo "  <body>" >> public/index.html
-          echo "    <a href="test-results/index.html">Test Results</a>" >> public/index.html
-          echo "    <a href="code-coverage/index.html">Code Coverage</a>" >> public/index.html
-          echo "  </body>" >> public/index.html
-          echo "</html>" >> public/index.html
+          echo '<!DOCTYPE html>' >> public/index.html
+          echo '<html>' >> public/index.html
+          echo '  <head>' >> public/index.html
+          echo '    <title>Job Results</title>' >> public/index.html
+          echo '  </head>' >> public/index.html
+          echo '  <body>' >> public/index.html
+          echo '    <a href="test-results/index.html">Test Results</a>' >> public/index.html
+          echo '    <a href="code-coverage/index.html">Code Coverage</a>' >> public/index.html
+          echo '  </body>' >> public/index.html
+          echo '</html>' >> public/index.html
         
       - name: Publish Results 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
