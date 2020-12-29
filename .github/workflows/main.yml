@@ -61,6 +61,7 @@ jobs:
           #BRANCH: gh-pages # The branch the action should deploy to.
           #FOLDER: public # The folder the action should deploy.
           #CLEAN: true # 
+          #CLEAN_EXCLUDE: ["dev"]
             # Runs a set of commands using the runners shell
     
       - name: Run performance tests
