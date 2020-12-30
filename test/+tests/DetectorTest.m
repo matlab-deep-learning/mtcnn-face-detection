@@ -42,9 +42,9 @@ classdef DetectorTest < matlab.unittest.TestCase
             
             [bboxes, scores, landmarks] = detector.detect(inputImage);
             
-            test.verifyEqual(size(bboxes), [6, 4]);
-            test.verifyEqual(size(scores), [6, 1]);
-            test.verifyEqual(size(landmarks), [6, 5, 2]);
+            test.verifySize(bboxes, [6, 4]);
+            test.verifySize(scores, [6, 1]);
+            test.verifySize(landmarks, [6, 5, 2]);
             
             test.verifyEqual(bboxes, test.Reference.bboxes, "RelTol", 1e-6);
             test.verifyEqual(scores, test.Reference.scores, "RelTol", 1e-6);
@@ -81,9 +81,9 @@ classdef DetectorTest < matlab.unittest.TestCase
             
             [bboxes, scores, landmarks] = detector.detect(test.Image);
             
-            test.verifyEqual(size(bboxes), [6, 4]);
-            test.verifyEqual(size(scores), [6, 1]);
-            test.verifyEqual(size(landmarks), [6, 5, 2]);
+            test.verifySize(bboxes, [6, 4]);
+            test.verifySize(scores, [6, 1]);
+            test.verifySize(landmarks, [6, 5, 2]);
             
             boxOverlaps = bboxOverlapRatio(bboxes, test.Reference.bboxes);
             test.verifyEqual(max(boxOverlaps) > 0.8, true(1, 6));
@@ -115,15 +115,15 @@ classdef DetectorTest < matlab.unittest.TestCase
         function testGpuDetect(test, imageTypeConversion, useDagNet)
             
             % filter if no GPU present
-            test.assumeGreaterThan(gpuDeviceCount, 0);
+            test.assumeGreaterThan(gpuDeviceCount, 0, "This test only runs with GPUs present");
             
             inputImage = imageTypeConversion(test.Image);
             detector = mtcnn.Detector("UseGPU", true, "UseDagNet", useDagNet);
             [bboxes, scores, landmarks] = detector.detect(inputImage);
             
-            test.verifyEqual(size(bboxes), [6, 4]);
-            test.verifyEqual(size(scores), [6, 1]);
-            test.verifyEqual(size(landmarks), [6, 5, 2]);
+            test.verifySize(bboxes, [6, 4]);
+            test.verifySize(scores, [6, 1]);
+            test.verifySize(landmarks, [6, 5, 2]);
             
             % Reference was taken on the CPU so increase relative tolerance
             test.verifyEqual(bboxes, test.Reference.bboxes, "RelTol", 1e-1);

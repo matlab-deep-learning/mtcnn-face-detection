@@ -33,14 +33,10 @@ jobs:
         uses: matlab-actions/run-command@v0
         with:
           command: runAllTests
-          
-      - name: Upload Artifacts  
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifacts
-          path: artifacts/   
+           
 
       - name: Create public index
+        if: ${{ always() }}
         run: |
           echo '<!DOCTYPE html>' >> public/index.html
           echo '<html>' >> public/index.html
@@ -55,6 +51,7 @@ jobs:
           echo '</html>' >> public/index.html
         
       - name: Publish Results 🚀
+        if: ${{ always() }}
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
