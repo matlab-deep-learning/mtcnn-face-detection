@@ -1,14 +1,14 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Run performance tests
 
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  #push:
+   # branches: [ master ]
+  #pull_request:
+   # branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,40 +29,6 @@ jobs:
         uses: matlab-actions/setup-matlab@v0
 
       # Runs a set of commands using the runners shell
-      - name: Run all tests
-        uses: matlab-actions/run-command@v0
-        with:
-          command: runAllTests
-          
-      - name: Upload Artifacts  
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifacts
-          path: artifacts/   
-
-      - name: Create public index
-        run: |
-          echo '<!DOCTYPE html>' >> public/index.html
-          echo '<html>' >> public/index.html
-          echo '  <head>' >> public/index.html
-          echo '    <title>Job Results</title>' >> public/index.html
-          echo '  </head>' >> public/index.html
-          echo '  <body>' >> public/index.html
-          echo '    <p><a href="test-results/index.html">Test Results</a></p>' >> public/index.html
-          echo '    <p><a href="code-coverage/index.html">Code Coverage</a></p>' >> public/index.html
-          echo '    <p><a href="dev/bench/index.html">Performance Results</a></p>' >> public/index.html
-          echo '  </body>' >> public/index.html
-          echo '</html>' >> public/index.html
-        
-      - name: Publish Results 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: public # The folder the action should deploy.
-          CLEAN: true # 
-          CLEAN_EXCLUDE: '["dev"]'
-    
       - name: Run performance tests
         uses: matlab-actions/run-command@v0
         with:
@@ -80,11 +46,9 @@ jobs:
           # What benchmark tool the output.txt came from
           tool: 'googlecpp'
           output-file-path: benchmark-data.json
-          #fail-on-alert: true
+          #external-data-json-path: ./cache/benchmark-data.json
+          fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           comment-on-alert: true
           alert-comment-cc-users: '@acampbel'
-
- 
-          
