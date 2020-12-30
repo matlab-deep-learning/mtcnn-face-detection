@@ -121,9 +121,9 @@ classdef DetectorTest < matlab.unittest.TestCase
             detector = mtcnn.Detector("UseGPU", true, "UseDagNet", useDagNet);
             [bboxes, scores, landmarks] = detector.detect(inputImage);
             
-            test.verifySize(bboxes), [6, 4]);
-            test.verifySize(scores), [6, 1]);
-            test.verifySize(landmarks), [6, 5, 2]);
+            test.verifySize(bboxes, [6, 4]);
+            test.verifySize(scores, [6, 1]);
+            test.verifySize(landmarks, [6, 5, 2]);
             
             % Reference was taken on the CPU so increase relative tolerance
             test.verifyEqual(bboxes, test.Reference.bboxes, "RelTol", 1e-1);
