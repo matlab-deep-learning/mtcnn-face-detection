@@ -86,7 +86,7 @@ classdef DetectorTest < matlab.unittest.TestCase
             test.verifySize(landmarks, [6, 5, 2]);
             
             boxOverlaps = bboxOverlapRatio(bboxes, test.Reference.bboxes);
-            test.verifyEqual(max(boxOverlaps) > 0.8, false(1, 6));
+            test.verifyEqual(max(boxOverlaps) > 0.8, true(1, 6));
             test.verifyEqual(scores, test.Reference.scores, "RelTol", 1e-3);
         end
         
