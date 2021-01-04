@@ -40,8 +40,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: public # The folder the action should deploy.
-          CLEAN: false # 
-          CLEAN_EXCLUDE: '["dev"]'
+          CLEAN: true # 
+          CLEAN_EXCLUDE: '["dev", "jobs"]'
      # - name: Create public index
       #  run: |
        #   echo '<!DOCTYPE html>' >> public/index.html
@@ -133,7 +133,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: . # The folder the action should deploy.
-          CLEAN: true # 
+          CLEAN: false # 
           CLEAN_EXCLUDE: '["dev", "jobs"]'
         
 
