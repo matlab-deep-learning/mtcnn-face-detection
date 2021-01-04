@@ -21,7 +21,9 @@ jobs:
     
     
     steps:
-      - uses: actions/checkout@v2
+      - name: Create public area
+        run:  mkdir public
+        
       - name: Create public index
         run: |
           echo '<!DOCTYPE html>' >> public/index.html
