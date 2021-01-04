@@ -80,12 +80,24 @@ jobs:
           path: ./cache
           key: ${{ runner.os }}-benchmark
 
-      - name: Store benchmark result
+      - name: Store benchmark result (cpp format)
         uses: rhysd/github-action-benchmark@v1
         with:
           # What benchmark tool the output.txt came from
           tool: 'googlecpp'
-          output-file-path: benchmark-data.json
+          output-file-path: cpp-benchmark-data.json
+          #fail-on-alert: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          comment-on-alert: true
+          alert-comment-cc-users: '@acampbel'
+
+      - name: Store benchmark result (pytest format)
+        uses: rhysd/github-action-benchmark@v1
+        with:
+          # What benchmark tool the output.txt came from
+          tool: 'pytest'
+          output-file-path: py-benchmark-data.json
           #fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
