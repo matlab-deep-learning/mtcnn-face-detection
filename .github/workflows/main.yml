@@ -37,7 +37,7 @@ jobs:
         run: sudo apt install tree
         
       - name: Create public Index
-        run: cd public ; tree -H '.' --noreport --charset utf-8 > index.html ; cd ..
+        run: cd public ; tree -d -H '.' --noreport --charset utf-8 > index.html ; cd ..
         
       - name: Publish Results 🚀
         if: ${{ always() }}
