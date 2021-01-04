@@ -57,10 +57,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: public # The folder the action should deploy.
-          CLEAN: true # 
+          CLEAN: false # 
           CLEAN_EXCLUDE: '["dev"]'
   assess-performance:
-    needs: validate-code
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
