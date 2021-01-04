@@ -90,7 +90,7 @@ jobs:
 
       - name: Store benchmark result (pytest format)
         uses: rhysd/github-action-benchmark@v1
-        with:
+        with:  
           # What benchmark tool the output.txt came from
           tool: 'pytest'
           output-file-path: py-benchmark-data.json
@@ -111,8 +111,29 @@ jobs:
       - name: Install tree
         run: sudo apt install tree
         
-      - name: Create public Index
-        run: tree -d -H '.' --noreport --charset utf-8 > index.html
+      - name: Create top level index
+        run: tree -d -L 1 -H '.' --noreport --charset utf-8 > index.html
+    
+      - name: Create the benchmarking index
+        run: |
+          cd dev
+          tree -d -L 1 -H '.' --noreport --charset utf-8 > index.html
+          cd .. 
+        
+      - name: Create jobs index
+        run: cd jobs ; tree -d -L 1 -H '.' --noreport --charset utf-8 > index.html
+
+      - name: Create this jobs index
+        run: cd $GITHUB_RUN_ID ; tree -d -L 1-H '.' --noreport --charset utf-8 > index.html
+
+      - name: Publish to pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: . # The folder the action should deploy.
+          CLEAN: false # 
+          CLEAN_EXCLUDE: '["dev"]'
         
 
  
