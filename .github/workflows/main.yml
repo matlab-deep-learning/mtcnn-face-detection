@@ -130,7 +130,7 @@ jobs:
         run: ls ; echo $GITHUB_RUN_ID
         
       - name: Create this jobs index
-        run: cd $GITHUB_RUN_ID ; tree -d -L 1-H '.' --noreport --charset utf-8 > index.html
+        run: cd jobs/$GITHUB_RUN_ID ; tree -d -L 1-H '.' --noreport --charset utf-8 > index.html
 
 
       - name: Publish to pages
