@@ -64,6 +64,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v0
+        
       - name: Run performance tests
         uses: matlab-actions/run-command@v0
         with:
