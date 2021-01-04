@@ -110,6 +110,9 @@ jobs:
 
       - name: Install tree
         run: sudo apt install tree
+
+      - name: Look around
+        run: tree
         
       - name: Create top level index
         run: tree -d -L 1 -H '.' --noreport --charset utf-8 > index.html
