@@ -49,6 +49,12 @@ jobs:
           echo '    <p><a href="dev/bench/index.html">Performance Results</a></p>' >> public/index.html
           echo '  </body>' >> public/index.html
           echo '</html>' >> public/index.html
+          
+      - name: Create ht access file
+        if: ${{ always() }}
+        run: |
+          echo 'RewriteEngine On' >> public/.htaccess
+          echo 'RewriteRule ^(.*)index([\.html]*)$ /$1 [R=302,L] >> public/.htaccess
         
       - name: Publish Results 🚀
         if: ${{ always() }}
