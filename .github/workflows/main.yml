@@ -24,19 +24,19 @@ jobs:
       - name: Create public area
         run:  mkdir public
         
-      - name: Create public index
-        run: |
-          echo '<!DOCTYPE html>' >> public/index.html
-          echo '<html>' >> public/index.html
-          echo '  <head>' >> public/index.html
-          echo '    <title>Job Results</title>' >> public/index.html
-          echo '  </head>' >> public/index.html
-          echo '  <body>' >> public/index.html
-          echo '    <p><a href="test-results/index.html">Test Results</a></p>' >> public/index.html
-          echo '    <p><a href="code-coverage/index.html">Code Coverage</a></p>' >> public/index.html
-          echo '    <p><a href="dev/bench/index.html">Performance Results</a></p>' >> public/index.html
-          echo '  </body>' >> public/index.html
-          echo '</html>' >> public/index.html
+     # - name: Create public index
+      #  run: |
+       #   echo '<!DOCTYPE html>' >> public/index.html
+        #  echo '<html>' >> public/index.html
+         # echo '  <head>' >> public/index.html
+          #echo '    <title>Job Results</title>' >> public/index.html
+#          echo '  </head>' >> public/index.html
+ #         echo '  <body>' >> public/index.html
+  #        echo '    <p><a href="test-results/index.html">Test Results</a></p>' >> public/index.html
+   #       echo '    <p><a href="code-coverage/index.html">Code Coverage</a></p>' >> public/index.html
+    #      echo '    <p><a href="dev/bench/index.html">Performance Results</a></p>' >> public/index.html
+     #     echo '  </body>' >> public/index.html
+      #    echo '</html>' >> public/index.html
           
       - name: Create ht access file
         run: |
@@ -67,7 +67,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: public # The folder the action should deploy.
-          CLEAN: false # 
+          CLEAN: true # 
           CLEAN_EXCLUDE: '["dev"]'
   assess-performance:
     runs-on: ubuntu-latest
