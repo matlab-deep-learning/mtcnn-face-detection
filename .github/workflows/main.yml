@@ -19,9 +19,10 @@ jobs:
   reporting-scaffolding:
     runs-on: ubuntu-latest
     
+    
     steps:
+      - uses: actions/checkout@v2
       - name: Create public index
-        if: ${{ always() }}
         run: |
           echo '<!DOCTYPE html>' >> public/index.html
           echo '<html>' >> public/index.html
@@ -36,7 +37,6 @@ jobs:
           echo '</html>' >> public/index.html
           
       - name: Create ht access file
-        if: ${{ always() }}
         run: |
           echo 'RewriteEngine On' >> public/.htaccess
           echo 'RewriteRule ^(.*)index([\.html]*)$ /$1 [R=302,L]' >> public/.htaccess
