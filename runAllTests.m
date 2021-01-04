@@ -7,12 +7,15 @@ import matlab.unittest.plugins.codecoverage.CoverageReport;
 
 suite = testsuite(pwd, 'IncludeSubfolders', true);
 
-[~,~] = mkdir('public/test-results');
-[~,~] = mkdir('public/code-coverage');
+resultsDir = "public/jobs" + getenv("GITHUB_RUN_ID");
+testResultsDir = resultsDir + "test-results";
+coverageDir = resultsDir + "code-coverage";
+[~,~] = mkdir(testResultsDir);
+[~,~] = mkdir(coverageDir);
 
 runner = TestRunner.withTextOutput('OutputDetail', Verbosity.Detailed);
-runner.addPlugin(TestReportPlugin.producingHTML('public/test-results','IncludingPassingDiagnostics',true));
-runner.addPlugin(CodeCoveragePlugin.forFolder({'code'}, 'IncludingSubfolders', true, 'Producing', CoverageReport('public/code-coverage')));
+runner.addPlugin(TestReportPlugin.producingHTML(testResultsDir,'IncludingPassingDiagnostics',true));
+runner.addPlugin(CodeCoveragePlugin.forFolder({'code'}, 'IncludingSubfolders', true, 'Producing', CoverageReport(coverageDir)));
 
 results = runner.run(suite);
 
