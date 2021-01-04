@@ -33,6 +33,9 @@ jobs:
         with:
           command: runAllTests
                   
+      - name: Install tree
+        run: sudo apt install tree
+        
       - name: Create public Index
         run: cd public ; tree -H '.' -L 1 --noreport --charset utf-8 > index.html ; cd ..
         
