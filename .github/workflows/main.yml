@@ -32,13 +32,7 @@ jobs:
         uses: matlab-actions/run-command@v0
         with:
           command: runAllTests
-                  
-      - name: Install tree
-        run: sudo apt install tree
-        
-      - name: Create public Index
-        run: cd public ; tree -d -H '.' --noreport --charset utf-8 > index.html ; cd ..
-        
+          
       - name: Publish Results 🚀
         if: ${{ always() }}
         uses: JamesIves/github-pages-deploy-action@3.7.1
@@ -106,10 +100,20 @@ jobs:
           comment-on-alert: true
           alert-comment-cc-users: '@acampbel'
   
-  #build-results-site:
-  #  runs-on: ubuntu-latest
- #   needs: [assess-performance,  validate-code]
-#    steps:
+  build-results-site:
+    runs-on: ubuntu-latest
+    needs: [assess-performance,  validate-code]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
+      - name: Install tree
+        run: sudo apt install tree
+        
+      - name: Create public Index
+        run: tree -d -H '.' --noreport --charset utf-8 > index.html
+        
 
  
           
