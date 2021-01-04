@@ -123,8 +123,12 @@ jobs:
       - name: Create jobs index
         run: cd jobs ; tree -d -L 1 -H '.' --noreport --charset utf-8 > index.html
 
+      - name: debug
+        run: ls ; echo $GITHUB_RUN_ID
+        
       - name: Create this jobs index
         run: cd $GITHUB_RUN_ID ; tree -d -L 1-H '.' --noreport --charset utf-8 > index.html
+
 
       - name: Publish to pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
