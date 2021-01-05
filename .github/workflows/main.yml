@@ -135,5 +135,6 @@ jobs:
           FOLDER: . # The folder the action should deploy.
           BASE_BRANCH: gh-pages
           CLEAN: false # 
+          PRESERVE: true
           CLEAN_EXCLUDE: '["dev", "jobs"]'
           
