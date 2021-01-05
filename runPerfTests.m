@@ -2,7 +2,7 @@ function runPerfTests
 suite = testsuite("Superclass", "matlab.perftest.TestCase");
 
 experiment = matlab.perftest.TimeExperiment.limitingSamplingError;
-results = experiment.run(suite(1));
+results = experiment.run(suite);
 
 cppjson = perfresults2json(results);
 fid = fopen("cpp-benchmark-data.json","w","n","UTF-8");
