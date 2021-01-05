@@ -124,7 +124,7 @@ jobs:
         run: cd jobs ;  rm -f index.html ; tree -d -L 1 -H '.' -T Jobs --noreport --charset utf-8 > index.html
         
       - name: Create this jobs index
-        run: cd jobs/$GITHUB_RUN_ID ; rm -f index.html ; tree -d -L 1 -H '.' -T 'Job $GITHUB_RUN_ID'  --noreport --charset utf-8 > index.html
+        run: cd jobs/$GITHUB_RUN_ID ; rm -f index.html ; tree -d -L 1 -H '.' -T "Job $GITHUB_RUN_ID"  --noreport --charset utf-8 > index.html
 
 
       - name: Publish to pages
