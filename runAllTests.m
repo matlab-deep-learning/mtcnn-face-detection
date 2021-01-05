@@ -17,7 +17,7 @@ runner = TestRunner.withTextOutput('OutputDetail', Verbosity.Detailed);
 runner.addPlugin(TestReportPlugin.producingHTML(testResultsDir,'IncludingPassingDiagnostics',true));
 runner.addPlugin(CodeCoveragePlugin.forFolder({'code'}, 'IncludingSubfolders', true, 'Producing', CoverageReport(coverageDir)));
 
-results = runner.run(suite);
+results = runner.run(suite(1));
 
 nfailed = nnz([results.Failed]);
 assert(nfailed == 0, [num2str(nfailed) ' test(s) failed.']);
