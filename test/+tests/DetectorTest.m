@@ -115,7 +115,7 @@ classdef DetectorTest < matlab.unittest.TestCase
         function testGpuDetect(test, imageTypeConversion, useDagNet)
             
             % filter if no GPU present
-            test.assumeGreaterThan(gpuDeviceCount, 0);
+            test.assumeGreaterThan(gpuDeviceCount, 0, "This test is only valid on machines with at least one GPU");
             
             inputImage = imageTypeConversion(test.Image);
             detector = mtcnn.Detector("UseGPU", true, "UseDagNet", useDagNet);
