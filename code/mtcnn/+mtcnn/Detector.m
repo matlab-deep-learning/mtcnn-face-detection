@@ -158,8 +158,12 @@ classdef Detector < matlab.mixin.SetGet
             bboxes = mtcnn.util.applyCorrection(bboxes, correction);
             bboxes(faceProbs < obj.ConfidenceThresholds(netIdx), :) = [];
             scores = faceProbs(faceProbs >= obj.ConfidenceThresholds(netIdx));
-            if ~isempty(scores) 
-                [bboxes, scores, index] = selectStrongestBbox(gather(bboxes), scores, ...
+            if ~isempty(scores)
+                if verLessThan("matlab", "9.9")
+                    % < R2020b no gpuArray support for selectStrongestBbox
+                    [bboxes, scores] = gather(bboxes, scores);
+                end
+                [bboxes, scores, index] = selectStrongestBbox(bboxes, scores, ...
                                 "RatioType", "Min", ...
                                 "OverlapThreshold", obj.NmsThresholds(netIdx));
                 if netIdx == 3
