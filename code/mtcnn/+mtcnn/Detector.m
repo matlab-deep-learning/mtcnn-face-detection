@@ -161,11 +161,9 @@ classdef Detector < matlab.mixin.SetGet
             if ~isempty(scores)
                 if verLessThan("matlab", "9.9")
                     % < R2020b no gpuArray support for selectStrongestBbox
-                    [inputs{:}] = gather(bboxes, scores);
-                else
-                    inputs = {bboxes, scores};
+                    [bboxes, scores] = gather(bboxes, scores);
                 end
-                [bboxes, scores, index] = selectStrongestBbox(inputs{:}, ...
+                [bboxes, scores, index] = selectStrongestBbox(bboxes, scores, ...
                                 "RatioType", "Min", ...
                                 "OverlapThreshold", obj.NmsThresholds(netIdx));
                 if netIdx == 3
