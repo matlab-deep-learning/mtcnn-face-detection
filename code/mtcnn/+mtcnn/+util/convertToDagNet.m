@@ -44,10 +44,10 @@ function net = convertToDagNet(stage)
             output = cat(1, a, b, c);
     end
     
-    if strcmp(version('-release'), "2020b")
-        lgraph = functionToLayerGraph(netFunc, input, "GenerateLayer", "placeholder-layer");
-    else
+    if verLessThan('matlab', '9.9')
         lgraph = functionToLayerGraph(netFunc, input);
+    else
+        lgraph = functionToLayerGraph(netFunc, input, "GenerateLayer", "placeholder-layer");
     end
     placeholders = findPlaceholderLayers(lgraph);
     lgraph = removeLayers(lgraph, {placeholders.Name});
